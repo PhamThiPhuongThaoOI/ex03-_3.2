@@ -22,32 +22,32 @@ function fetchDogApi() {
 }
 
 function init() {
-  const container__images = document.querySelector('.container__images');
-  container__images.style.transition = 'transform 0.1s linear';
+  const container__images = document.querySelector(".container__images");
+  container__images.style.transition = "transform 0.1s linear";
   container__images.style.transform = `rotateY(${rotationY}deg)`;
-  
+
   cardImages.forEach((img, i) => {
     img.style.transform = `rotateY(${i * -30}deg) translateZ(-600px)`;
-    img.style.transition = 'opacity 0.5s';
-    img.style.opacity = '1';
+    img.style.transition = "opacity 0.5s";
+    img.style.opacity = "1";
   });
 
   addHoverEffects();
 }
 
 function addHoverEffects() {
-  cardImages.forEach(img => {
-    img.addEventListener('mouseenter', (e) => {
-      cardImages.forEach(t => {
+  cardImages.forEach((img) => {
+    img.addEventListener("mouseenter", (e) => {
+      cardImages.forEach((t) => {
         if (t === e.currentTarget) {
-          t.style.opacity = '1';
+          t.style.opacity = "1";
         } else {
-          t.style.opacity = '0.25';
+          t.style.opacity = "0.25";
         }
       });
     });
-    img.addEventListener('mouseleave', () => {
-      cardImages.forEach(t => t.style.opacity = '1');
+    img.addEventListener("mouseleave", () => {
+      cardImages.forEach((t) => (t.style.opacity = "1"));
     });
   });
 }
@@ -56,7 +56,7 @@ function dragStart(e) {
   isDragging = true;
   xPos = e.clientX || e.touches[0].clientX;
   startX = xPos;
-  document.querySelector('.container__images').style.cursor = 'grabbing';
+  document.querySelector(".container__images").style.cursor = "grabbing";
   e.preventDefault();
 }
 
@@ -74,7 +74,7 @@ function drag(e) {
   }
 
   requestId = requestAnimationFrame(() => {
-    const container__images = document.querySelector('.container__images');
+    const container__images = document.querySelector(".container__images");
     container__images.style.transform = `rotateY(${rotationY}deg)`;
   });
 
@@ -83,7 +83,7 @@ function drag(e) {
 
 function dragEnd(e) {
   isDragging = false;
-  document.querySelector('.container__images').style.cursor = 'grab';
+  document.querySelector(".container__images").style.cursor = "grab";
 
   if (requestId) {
     cancelAnimationFrame(requestId);
@@ -93,13 +93,13 @@ function dragEnd(e) {
   e.preventDefault();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   fetchDogApi();
-  const container__images = document.querySelector('.container__images');
-  container__images.addEventListener('mousedown', dragStart);
-  container__images.addEventListener('mousemove', drag);
-  container__images.addEventListener('mouseup', dragEnd);
-  container__images.addEventListener('touchstart', dragStart);
-  container__images.addEventListener('touchmove', drag);
-  container__images.addEventListener('touchend', dragEnd);
+  const container__images = document.querySelector(".container__images");
+  container__images.addEventListener("mousedown", dragStart);
+  container__images.addEventListener("mousemove", drag);
+  container__images.addEventListener("mouseup", dragEnd);
+  container__images.addEventListener("touchstart", dragStart);
+  container__images.addEventListener("touchmove", drag);
+  container__images.addEventListener("touchend", dragEnd);
 });
